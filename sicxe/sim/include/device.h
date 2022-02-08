@@ -50,6 +50,7 @@ public:
 
     uint8_t read() override;
     void write(uint8_t value) override;
+    void reset();
 };
 
 #endif

@@ -31,11 +31,24 @@ FileDevice::~FileDevice()
 
 uint8_t FileDevice::read()
 {
-    return fileStream.get();
+    if (fileStream.peek() == EOF)
+    {
+        return 0;
+    }
+    else
+    {
+        return fileStream.get();
+    }
 }
 
 void FileDevice::write(uint8_t value)
 {
     fileStream.write(reinterpret_cast<char*>(&value), 1);
     fileStream.flush();
+}
+
+void FileDevice::reset()
+{
+    fileStream.clear();
+    fileStream.seekg(0);
 }
