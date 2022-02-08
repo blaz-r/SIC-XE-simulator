@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <QObject>
+#include <iostream>
 
 class Registers : public QObject
 {
@@ -71,12 +72,11 @@ public:
     template<typename N>
     void compareAndSetSw(N value1, N value2)
     {
-        int comp = value1 - value2;
-        if(comp < 0) 
+        if(value1 < value2)
         {
             setSW(LT);
         }
-        else if (comp > 0)
+        else if (value1 > value2)
         {
             setSW(GT);
         } 
