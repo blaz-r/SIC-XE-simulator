@@ -395,8 +395,8 @@ int Machine::execSICF3F4(int opcode, int ni, int operand)
 
         case Opcode::STA: 
             setWord(storeAddress(ni, operand), A); break;
-        case Opcode::STB: 
-            setWord(storeAddress(ni, operand), reg.getB());
+        case Opcode::STB:
+            setWord(storeAddress(ni, operand), reg.getB()); break;
         case Opcode::STCH:
             setByte(storeAddress(ni, operand), A); break;
         // TODO
@@ -470,7 +470,8 @@ int Machine::execute()
         // SIC
         op = ((op & 0x7F) << 8) | fetch();
         // printf("sic: %X\n", op);
-    }else if(e)
+    }
+    else if(e)
     {
         // F4
         op = ((op & 15) << 16) | (fetch() << 8) | fetch();
