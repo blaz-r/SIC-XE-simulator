@@ -534,6 +534,7 @@ void Machine::reset()
     }
 }
 
+// absolute loader, M records are ignored
 bool Machine::loadSection(std::string fileName)
 {
     currentFile = "";
@@ -548,8 +549,10 @@ bool Machine::loadSection(std::string fileName)
     int codeLength = readWord(r);
     r.get(); // remove newl
 
-    // read text lines until we get to E
-    while (r.get() != 'E')
+    // read text lines until we get to E or M record
+    // M records are ignored !!!
+    int initial;
+    while ((initial = r.get()) != 'E' && initial != 'M')
     {
         startAddress = readWord(r);
         int instrCount = readByte(r);
