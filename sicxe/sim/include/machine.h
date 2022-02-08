@@ -16,7 +16,7 @@ class Machine : public QObject
     Q_OBJECT
 
 private:
-    std::array<std::shared_ptr<Device>, 256> devices = {};
+    std::array<std::shared_ptr<Device>, 256> devices = {nullptr};
     std::string currentFile = "";
 public:
     uint8_t* memory;

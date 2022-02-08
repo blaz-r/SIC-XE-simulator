@@ -515,8 +515,18 @@ int Machine::execute()
     return 0;
 }
 
-void Machine::reset() {
+void Machine::reset()
+{
     reg.clearRegisters();
+
+    for(int i = 3; i < 256; i++)
+    {
+        if(devices[i] != nullptr)
+        {
+            devices[i].reset();
+        }
+    }
+
     memset(memory, 0, MAX_ADDRESS);
     if(currentFile != "")
     {
